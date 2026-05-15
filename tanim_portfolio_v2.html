@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ehatashamul Haque Tanim — Supply Chain Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-bg: #03070f;
+  --c-bg2: #060d1a;
+  --c-bg3: #080f20;
+  --c-cyan: #00d4ff;
+  --c-cyan2: #0ea5e9;
+  --c-blue: #3b82f6;
+  --c-indigo: #6366f1;
+  --c-gold: #f0b429;
+  --c-text: rgba(255,255,255,0.88);
+  --c-muted: rgba(255,255,255,0.45);
+  --c-dim: rgba(255,255,255,0.18);
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--c-bg);color:var(--c-text);font-family:var(--font-body);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--c-cyan);border-radius:2px}
+
+/* ─── ANIMATED GRID BACKGROUND ─── */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.grid-bg::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,212,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.035) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridPulse 8s ease-in-out infinite;
+}
+.grid-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,212,255,0.06) 0%,transparent 70%),
+             radial-gradient(ellipse 40% 40% at 80% 80%,rgba(99,102,241,0.06) 0%,transparent 70%);
+}
+@keyframes gridPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+
+/* ─── PARTICLES ─── */
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.particle{position:absolute;width:2px;height:2px;background:var(--c-cyan);border-radius:50%;animation:floatParticle var(--dur,8s) var(--delay,0s) infinite linear;opacity:0;left:var(--x,50%);top:100%}
+@keyframes floatParticle{0%{top:100%;opacity:0}10%{opacity:0.6}90%{opacity:0.2}100%{top:-5%;opacity:0}}
+
+/* ─── NAV ─── */
+nav{position:sticky;top:0;z-index:200;background:rgba(3,7,15,0.82);backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,212,255,0.1)}
+.nav-inner{max-width:1200px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.logo{font-family:var(--font-head);font-weight:800;font-size:1rem;letter-spacing:2px;color:var(--c-cyan);display:flex;align-items:center;gap:8px}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--c-cyan),var(--c-indigo));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem}
+.nav-links{display:flex;gap:0.25rem}
+.nav-links a{color:var(--c-muted);text-decoration:none;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;transition:all 0.2s;font-weight:500}
+.nav-links a:hover{color:var(--c-cyan);background:rgba(0,212,255,0.07)}
+.nav-cta{background:linear-gradient(135deg,var(--c-cyan),var(--c-blue))!important;color:#000!important;font-weight:700!important;padding:6px 16px!important}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:6rem 2rem 4rem;overflow:hidden}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:5rem;align-items:center;position:relative;z-index:2}
+
+/* World Map Canvas */
+.world-map-wrap{position:absolute;inset:0;z-index:1;opacity:0.5}
+canvas#worldMap{position:absolute;inset:0;width:100%;height:100%}
+
+.hero-left{animation:fadeLeft 1s ease both}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.25);border-radius:100px;padding:6px 16px 6px 10px;margin-bottom:1.8rem;font-size:0.72rem;color:var(--c-cyan);letter-spacing:1.5px;text-transform:uppercase}
+.badge-dot{width:7px;height:7px;background:var(--c-cyan);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,0.5)}50%{box-shadow:0 0 0 6px rgba(0,212,255,0)}}
+.hero h1{font-family:var(--font-head);font-weight:800;font-size:clamp(2.8rem,5vw,4.4rem);line-height:1.05;margin-bottom:1.2rem}
+.grad-text{background:linear-gradient(135deg,var(--c-cyan) 0%,var(--c-blue) 40%,var(--c-indigo) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-tagline{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(0,212,255,0.8);margin-bottom:0.5rem;font-weight:300;letter-spacing:0.5px;min-height:32px}
+.hero-tagline span{font-weight:600}
+.cursor-blink{color:var(--c-cyan);animation:blink 0.9s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{font-size:0.9rem;color:var(--c-muted);line-height:1.9;margin-bottom:2.5rem;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:0.75rem 2rem;border-radius:10px;background:linear-gradient(135deg,var(--c-cyan),var(--c-blue));color:#000;border:none;cursor:pointer;font-weight:700;font-size:0.85rem;letter-spacing:0.5px;box-shadow:0 0 30px rgba(0,212,255,0.3);transition:all 0.25s;text-decoration:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,212,255,0.5)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:0.75rem 2rem;border-radius:10px;background:transparent;border:1px solid rgba(0,212,255,0.35);color:var(--c-cyan);cursor:pointer;font-weight:600;font-size:0.85rem;transition:all 0.25s}
+.btn-ghost:hover{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.6)}
+
+/* ─── HERO PHOTO ─── */
+.hero-right{display:flex;justify-content:center;align-items:center;animation:fadeRight 1s ease 0.3s both;position:relative;z-index:2}
+.photo-wrap{position:relative;width:360px}
+.photo-glow-ring{position:absolute;inset:-20px;border-radius:36px;background:conic-gradient(from 0deg,var(--c-cyan),var(--c-blue),var(--c-indigo),var(--c-cyan));opacity:0.4;filter:blur(20px);animation:rotateSlow 6s linear infinite}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.photo-border{position:absolute;inset:-3px;border-radius:28px;background:linear-gradient(135deg,var(--c-cyan),var(--c-indigo),var(--c-cyan));animation:borderFlow 4s linear infinite;background-size:200% 200%}
+@keyframes borderFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.photo-inner{position:relative;border-radius:26px;overflow:hidden;background:var(--c-bg2);z-index:1}
+.photo-placeholder{width:100%;height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--c-bg3) 0%,#0a1628 50%,#060d1a 100%);position:relative;overflow:hidden}
+/* Cinematic executive silhouette */
+.exec-scene{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:2rem}
+.exec-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(0,212,255,0.12) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 30% 70%,rgba(59,130,246,0.1) 0%,transparent 60%)}
+/* Floating screens in background */
+.screen{position:absolute;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.screen::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,212,255,0.03) 3px,rgba(0,212,255,0.03) 4px)}
+.s1{width:120px;height:70px;top:12%;left:5%;transform:rotate(-8deg);animation:screenFlicker 3s ease-in-out infinite}
+.s2{width:90px;height:55px;top:20%;right:8%;transform:rotate(6deg);animation:screenFlicker 4s ease-in-out 1s infinite}
+.s3{width:70px;height:45px;top:45%;left:2%;transform:rotate(-4deg);animation:screenFlicker 5s ease-in-out 2s infinite}
+@keyframes screenFlicker{0%,100%{opacity:0.6}50%{opacity:1;box-shadow:0 0 15px rgba(0,212,255,0.2)}}
+/* Exec silhouette */
+.exec-figure{width:180px;height:260px;position:relative;z-index:2}
+.exec-head{width:56px;height:60px;background:linear-gradient(180deg,#c8a882,#b08060);border-radius:50% 50% 45% 45%;margin:0 auto;position:relative;box-shadow:0 0 20px rgba(0,212,255,0.2)}
+.exec-head::before{content:'';position:absolute;bottom:-4px;left:15%;width:70%;height:8px;background:#b08060;border-radius:0 0 10px 10px}
+.exec-shoulder{width:160px;height:180px;background:linear-gradient(180deg,#0d1c35 0%,#06111f 100%);border-radius:80px 80px 30px 30px;margin:0 auto;position:relative;border:1px solid rgba(59,130,246,0.15);box-shadow:0 0 40px rgba(0,212,255,0.1),inset 0 0 30px rgba(0,0,0,0.5)}
+.exec-shoulder::after{content:'';position:absolute;top:20px;left:50%;transform:translateX(-50%);width:4px;height:120px;background:linear-gradient(180deg,rgba(0,212,255,0.4),transparent);border-radius:2px}
+.exec-tie{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:20px;height:70px;background:linear-gradient(180deg,var(--c-cyan),var(--c-blue));border-radius:2px 2px 8px 8px;opacity:0.8}
+.exec-lapel-l{position:absolute;top:8px;left:30%;width:0;height:0;border-left:25px solid transparent;border-right:10px solid transparent;border-top:50px solid rgba(255,255,255,0.06)}
+.exec-lapel-r{position:absolute;top:8px;right:28%;width:0;height:0;border-left:10px solid transparent;border-right:25px solid transparent;border-top:50px solid rgba(255,255,255,0.06)}
+.photo-badge-wrap{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);z-index:5;white-space:nowrap}
+.photo-badge{background:rgba(3,7,15,0.92);border:1px solid rgba(0,212,255,0.4);backdrop-filter:blur(12px);border-radius:100px;padding:8px 22px;font-size:0.73rem;color:var(--c-cyan);letter-spacing:1.5px;font-family:var(--font-mono)}
+/* Live stats floating beside photo */
+.float-stat{position:absolute;background:rgba(3,7,15,0.88);border:1px solid rgba(0,212,255,0.25);backdrop-filter:blur(10px);border-radius:12px;padding:0.7rem 1rem;white-space:nowrap}
+.float-stat .fs-num{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--c-cyan)}
+.float-stat .fs-lbl{font-size:0.68rem;color:var(--c-muted);margin-top:1px;letter-spacing:0.5px}
+.fs1{top:15%;left:-120px;animation:floatCard 3s ease-in-out infinite}
+.fs2{top:45%;right:-115px;animation:floatCard 3s ease-in-out 1.5s infinite}
+.fs3{bottom:20%;left:-105px;animation:floatCard 3s ease-in-out 0.8s infinite}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* ─── SECTION BASE ─── */
+.section{padding:6rem 2rem;position:relative;z-index:2}
+.section-inner{max-width:1200px;margin:0 auto}
+.sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.sec-tag{font-family:var(--font-mono);font-size:0.68rem;color:var(--c-cyan);letter-spacing:2px;text-transform:uppercase}
+.sec-line{height:1px;width:50px;background:linear-gradient(90deg,var(--c-cyan),transparent)}
+h2.sec-h{font-family:var(--font-head);font-weight:800;font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:0.5rem}
+.sec-sub{font-size:0.9rem;color:var(--c-muted);margin-bottom:3rem;max-width:600px}
+
+/* ─── ABOUT ─── */
+.about-wrap{display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:start}
+.about-portrait-wrap{position:sticky;top:80px}
+.about-portrait{width:100%;height:380px;border-radius:24px;overflow:hidden;border:1px solid rgba(0,212,255,0.2);position:relative;background:linear-gradient(160deg,#0a1628,#060d1a)}
+.portrait-exec{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:1.5rem;position:relative}
+.portrait-exec-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(0,212,255,0.1) 0%,transparent 60%)}
+.portrait-fig{width:140px;height:200px;position:relative;z-index:1}
+.portrait-fig .ph{width:44px;height:48px;background:linear-gradient(180deg,#c8a882,#b08060);border-radius:50% 50% 45% 45%;margin:0 auto}
+.portrait-fig .ps{width:130px;height:150px;background:linear-gradient(180deg,#0d1c35,#060d1a);border-radius:70px 70px 20px 20px;margin:0 auto;border:1px solid rgba(0,212,255,0.12);box-shadow:0 0 30px rgba(0,212,255,0.08)}
+.portrait-fig .pt{position:absolute;top:52px;left:50%;transform:translateX(-50%);width:14px;height:60px;background:linear-gradient(180deg,var(--c-cyan),var(--c-blue));border-radius:2px 2px 6px 6px;opacity:0.8}
+.ab-map-glow{position:absolute;bottom:-20px;left:-20px;right:-20px;height:80px;background:radial-gradient(ellipse,rgba(0,212,255,0.15) 0%,transparent 70%)}
+.portrait-label{font-family:var(--font-mono);font-size:0.68rem;color:var(--c-cyan);letter-spacing:1px;text-align:center;margin-top:0.5rem;position:relative;z-index:2}
+.about-text p{font-size:0.92rem;color:var(--c-muted);line-height:1.95;margin-bottom:1rem}
+.about-text p strong{color:var(--c-text)}
+.tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;margin-bottom:2.5rem}
+.tag{background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.18);border-radius:100px;padding:4px 14px;font-size:0.72rem;color:var(--c-cyan);font-family:var(--font-mono)}
+
+/* ─── EXECUTIVE METRICS ─── */
+.metrics-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2.5rem}
+.metric-card{background:rgba(6,13,26,0.8);border:1px solid rgba(0,212,255,0.15);border-radius:16px;padding:1.3rem 1rem;text-align:center;position:relative;overflow:hidden;transition:all 0.3s;cursor:default}
+.metric-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05) 0%,transparent 60%);opacity:0;transition:opacity 0.3s}
+.metric-card:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 0 30px rgba(0,212,255,0.12);transform:translateY(-3px)}
+.metric-card:hover::before{opacity:1}
+.metric-icon{font-size:1.4rem;margin-bottom:0.5rem}
+.metric-num{font-family:var(--font-head);font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--c-cyan),var(--c-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.metric-lbl{font-size:0.68rem;color:var(--c-muted);letter-spacing:0.5px;margin-top:4px;line-height:1.4}
+
+/* ─── EXPERIENCE ─── */
+.exp-section{background:rgba(6,13,26,0.5)}
+.tl{position:relative;padding-left:2rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--c-cyan),rgba(0,212,255,0.1))}
+.tl-item{position:relative;margin-bottom:2.5rem;animation:fadeLeft 0.6s ease both;opacity:0}
+.tl-item.visible{opacity:1}
+.tl-dot{position:absolute;left:-2.5rem;top:1.2rem;width:12px;height:12px;border-radius:50%;border:2px solid;box-shadow:0 0 12px currentColor}
+.tl-card{background:rgba(8,15,32,0.7);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:1.6rem;transition:all 0.3s;border-left:3px solid}
+.tl-card:hover{transform:translateX(6px);background:rgba(8,15,32,0.9)}
+.tl-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem}
+.tl-role{font-family:var(--font-head);font-weight:700;font-size:1rem;color:#fff}
+.tl-period{font-family:var(--font-mono);font-size:0.7rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:4px 12px;color:var(--c-muted)}
+.tl-company{font-size:0.82rem;font-weight:600;margin-bottom:0.8rem}
+.tl-bullets{list-style:none;padding:0}
+.tl-bullets li{font-size:0.82rem;color:var(--c-muted);padding:3px 0 3px 18px;position:relative;line-height:1.6}
+.tl-bullets li::before{content:'▸';position:absolute;left:0;color:var(--c-cyan);font-size:0.7rem;top:5px}
+
+/* ─── SKILLS ─── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.skill-card{background:rgba(6,13,26,0.8);border:1px solid rgba(0,212,255,0.1);border-radius:16px;padding:1.4rem;position:relative;overflow:hidden;transition:all 0.3s}
+.skill-card::after{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,transparent,transparent);box-shadow:inset 0 0 0 1px rgba(0,212,255,0);transition:box-shadow 0.3s}
+.skill-card:hover{border-color:rgba(0,212,255,0.35);box-shadow:0 0 25px rgba(0,212,255,0.1);transform:translateY(-2px)}
+.skill-card:hover::after{box-shadow:inset 0 0 0 1px rgba(0,212,255,0.2)}
+.skill-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.skill-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;border:1px solid rgba(0,212,255,0.2)}
+.skill-pct{font-family:var(--font-head);font-size:1.2rem;font-weight:800}
+.skill-name{font-size:0.82rem;font-weight:600;color:var(--c-text);margin-bottom:0.6rem}
+.skill-bar-bg{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.skill-bar-fill{height:100%;border-radius:2px;transition:width 1.4s cubic-bezier(0.4,0,0.2,1);width:0}
+
+/* ─── PROJECTS / OPERATIONS ─── */
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.op-card{background:rgba(6,13,26,0.8);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:1.6rem;position:relative;overflow:hidden;transition:all 0.35s;cursor:default}
+.op-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--c-grad,linear-gradient(90deg,var(--c-cyan),var(--c-blue)));transition:height 0.3s}
+.op-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 40px rgba(0,212,255,0.08)}
+.op-card:hover::before{height:3px}
+.op-icon{font-size:2rem;margin-bottom:1rem}
+.op-card h3{font-family:var(--font-head);font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;color:#fff}
+.op-card p{font-size:0.8rem;color:var(--c-muted);line-height:1.7}
+.op-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+.op-tag{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:6px;padding:2px 8px;font-size:0.65rem;color:var(--c-cyan);font-family:var(--font-mono)}
+
+/* ─── EDUCATION ─── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.edu-card{background:rgba(8,15,32,0.7);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:1.3rem;transition:all 0.3s}
+.edu-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.edu-type{display:inline-block;padding:2px 10px;border-radius:100px;font-size:0.65rem;letter-spacing:1px;margin-bottom:0.6rem;font-family:var(--font-mono)}
+.edu-card h4{font-family:var(--font-head);font-size:0.88rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px}
+.edu-org{font-size:0.72rem;color:var(--c-muted);margin-bottom:0.5rem}
+.edu-footer{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--c-muted);margin-top:0.5rem}
+.edu-grade{font-family:var(--font-mono)}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info p{font-size:0.9rem;color:var(--c-muted);line-height:1.9;margin-bottom:2rem}
+.contact-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,0.07);margin-bottom:0.75rem;text-decoration:none;transition:all 0.25s;background:rgba(8,15,32,0.6)}
+.contact-link:hover{border-color:rgba(0,212,255,0.35);background:rgba(0,212,255,0.05);transform:translateX(4px)}
+.cl-icon{width:42px;height:42px;border-radius:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.cl-label{font-size:0.7rem;color:var(--c-muted);margin-bottom:2px}
+.cl-val{font-size:0.85rem;color:var(--c-cyan)}
+.form-card{background:rgba(8,15,32,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:2rem}
+.form-row{margin-bottom:1rem}
+.form-label{font-size:0.72rem;color:var(--c-muted);letter-spacing:0.5px;display:block;margin-bottom:6px;font-family:var(--font-mono)}
+.form-input{width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-size:0.88rem;font-family:var(--font-body);outline:none;transition:all 0.2s;resize:none}
+.form-input:focus{border-color:var(--c-cyan);background:rgba(0,212,255,0.04);box-shadow:0 0 0 3px rgba(0,212,255,0.06)}
+.form-input::placeholder{color:rgba(255,255,255,0.2)}
+.form-submit{width:100%;padding:0.85rem;border-radius:10px;background:linear-gradient(135deg,var(--c-cyan),var(--c-blue));border:none;color:#000;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.25s;margin-top:0.5rem}
+.form-submit:hover{opacity:0.88;transform:translateY(-1px)}
+
+/* ─── FOOTER ─── */
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:2}
+.footer-logo{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--c-cyan);margin-bottom:0.5rem}
+.footer-sub{font-size:0.75rem;color:var(--c-muted)}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:3rem}
+  .hero-right{justify-content:center}
+  .photo-wrap{width:280px}
+  .photo-placeholder{height:340px}
+  .fs1,.fs2,.fs3{display:none}
+  .about-wrap{grid-template-columns:1fr}
+  .about-portrait-wrap{position:static}
+  .metrics-grid{grid-template-columns:repeat(3,1fr)}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .ops-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  nav .nav-links{gap:0}
+  .nav-links a{padding:6px 8px;font-size:0.65rem}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .ops-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="particles" id="particles"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-icon">⚓</div>
+      EHT
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#operations">Operations</a>
+      <a href="#education">Education</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="world-map-wrap"><canvas id="worldMap"></canvas></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        Global Supply Chain Executive
+      </div>
+      <h1>Ehatashamul<br>Haque <span class="grad-text">Tanim</span></h1>
+      <div class="hero-tagline">Driving Global Supply Chains in <span id="typed"></span><span class="cursor-blink">|</span></div>
+      <p class="hero-desc">Results-driven professional orchestrating end-to-end supply chains across international markets — from strategic sourcing to final delivery. Connecting vendors, carriers, and finance teams worldwide.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#">⬇ Download Resume</a>
+        <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Connect →</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-wrap">
+        <div class="photo-glow-ring"></div>
+        <div class="photo-border">
+          <div class="photo-inner">
+            <div class="photo-placeholder">
+              <div class="exec-bg"></div>
+              <!-- Background screens -->
+              <div class="screen s1"></div>
+              <div class="screen s2"></div>
+              <div class="screen s3"></div>
+              <!-- Executive figure -->
+              <div class="exec-scene">
+                <div class="exec-figure">
+                  <div class="exec-head"></div>
+                  <div style="position:relative">
+                    <div class="exec-shoulder">
+                      <div class="exec-tie"></div>
+                      <div class="exec-lapel-l"></div>
+                      <div class="exec-lapel-r"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-family:var(--font-mono);font-size:0.62rem;color:rgba(0,212,255,0.5);margin-top:1rem;letter-spacing:1px">SUPPLY CHAIN EXECUTIVE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="photo-badge-wrap">
+          <div class="photo-badge">📍 Dhaka, Bangladesh · Akij Venture Group</div>
+        </div>
+        <div class="float-stat fs1">
+          <div class="fs-num">3+</div>
+          <div class="fs-lbl">Companies Served</div>
+        </div>
+        <div class="float-stat fs2">
+          <div class="fs-num">100+</div>
+          <div class="fs-lbl">Intl Suppliers</div>
+        </div>
+        <div class="float-stat fs3">
+          <div class="fs-num">500+</div>
+          <div class="fs-lbl">Shipments Managed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// about</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Global Procurement <span class="grad-text">Professional</span></h2>
+    <div class="about-wrap">
+      <div>
+        <p class="sec-sub">Coordinating international trade operations with precision and strategic vision.</p>
+        <div class="about-text">
+          <p>A results-driven <strong>Supply Chain Management Executive</strong> with hands-on experience across foreign procurement, import operations, vendor development, and international logistics coordination.</p>
+          <p>Currently driving procurement excellence at <strong>Akij Venture Group</strong>, one of Bangladesh's leading conglomerates — managing supplier negotiations, LC/TT documentation, and cross-border shipment operations across multiple sourcing regions.</p>
+          <p>With a strong foundation in <strong>MBA Accounting</strong> and active pursuit of PGDSCM and CMA credentials, I combine financial acuity with supply chain operational expertise to deliver cost-optimized, compliant, and on-time procurement outcomes.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">🌏 International Sourcing</span>
+          <span class="tag">📦 Import Operations</span>
+          <span class="tag">🤝 Vendor Management</span>
+          <span class="tag">📋 LC / TT Documentation</span>
+          <span class="tag">✈ Air & Sea Freight</span>
+          <span class="tag">📊 ERP Systems</span>
+          <span class="tag">💡 Cost Optimization</span>
+        </div>
+        <!-- Executive Metrics -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon">🏭</div>
+            <div class="metric-num" id="m1">0</div>
+            <div class="metric-lbl">Suppliers Coordinated</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">🌐</div>
+            <div class="metric-num" id="m2">0</div>
+            <div class="metric-lbl">Countries Connected</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">🚢</div>
+            <div class="metric-num" id="m3">0</div>
+            <div class="metric-lbl">Shipments Managed</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">⚙️</div>
+            <div class="metric-num" id="m4">0</div>
+            <div class="metric-lbl">Procurement Ops</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">💰</div>
+            <div class="metric-num" id="m5">0</div>
+            <div class="metric-lbl">% Cost Optimization</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-portrait-wrap">
+        <div class="about-portrait">
+          <div class="portrait-exec">
+            <div class="portrait-exec-bg"></div>
+            <div class="portrait-fig">
+              <div class="ph"></div>
+              <div style="position:relative">
+                <div class="ps"></div>
+                <div class="pt"></div>
+              </div>
+            </div>
+            <div class="portrait-label">EHT · Executive Profile</div>
+            <div class="ab-map-glow"></div>
+          </div>
+        </div>
+        <!-- KPI mini-dashboard -->
+        <div style="margin-top:1rem;background:rgba(6,13,26,0.9);border:1px solid rgba(0,212,255,0.15);border-radius:14px;padding:1rem">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--c-cyan);letter-spacing:1.5px;margin-bottom:0.75rem">LIVE KPI SNAPSHOT</div>
+          <div id="kpi-bars"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<div class="section exp-section" id="experience">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// experience</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Enterprise Operations <span class="grad-text">History</span></h2>
+    <p class="sec-sub">A track record of delivering procurement excellence across leading organizations in Bangladesh.</p>
+    <div class="tl" id="tl"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// competencies</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Core Supply Chain <span class="grad-text">Skills</span></h2>
+    <p class="sec-sub">Enterprise-grade capabilities built through hands-on international procurement and logistics operations.</p>
+    <div class="skills-grid" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ OPERATIONS / PROJECTS ═══════════════ -->
+<div class="section" style="background:rgba(6,13,26,0.5)" id="operations">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// operations</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Supply Chain Operations &amp; <span class="grad-text">Strategic Contributions</span></h2>
+    <p class="sec-sub">Key operational domains where expertise has delivered measurable impact across international supply chains.</p>
+    <div class="ops-grid" id="ops-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ EDUCATION ═══════════════ -->
+<section class="section" id="education">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// education & certifications</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Academic &amp; <span class="grad-text">Professional Growth</span></h2>
+    <div class="edu-grid" id="edu-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="section" id="contact" style="background:rgba(6,13,26,0.5)">
+  <div class="section-inner">
+    <div class="sec-eyebrow"><span class="sec-tag">// contact</span><div class="sec-line"></div></div>
+    <h2 class="sec-h">Let's <span class="grad-text">Connect</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Open to strategic partnerships, procurement collaborations, and senior supply chain opportunities across international markets.</p>
+        <a class="contact-link" href="mailto:ehtanim01@gmail.com">
+          <div class="cl-icon">✉️</div>
+          <div><div class="cl-label">Email</div><div class="cl-val">ehtanim01@gmail.com</div></div>
+        </a>
+        <a class="contact-link" href="https://wa.me/8801773403768">
+          <div class="cl-icon">📱</div>
+          <div><div class="cl-label">Phone / WhatsApp</div><div class="cl-val">+88 01773403768</div></div>
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/ehtanim01" target="_blank">
+          <div class="cl-icon">💼</div>
+          <div><div class="cl-label">LinkedIn</div><div class="cl-val">linkedin.com/in/ehtanim01</div></div>
+        </a>
+        <!-- Trade route animation widget -->
+        <div style="margin-top:1.5rem;background:rgba(6,13,26,0.9);border:1px solid rgba(0,212,255,0.15);border-radius:14px;padding:1rem;overflow:hidden">
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--c-cyan);letter-spacing:1.5px;margin-bottom:0.75rem">ACTIVE TRADE NETWORK</div>
+          <canvas id="miniMap" width="340" height="160" style="width:100%;border-radius:8px"></canvas>
+        </div>
+      </div>
+      <div class="form-card">
+        <div id="form-state">
+          <div class="form-row"><label class="form-label">YOUR NAME</label><input class="form-input" id="fname" placeholder="Full Name"></div>
+          <div class="form-row"><label class="form-label">EMAIL ADDRESS</label><input class="form-input" id="femail" placeholder="you@company.com"></div>
+          <div class="form-row"><label class="form-label">SUBJECT</label><input class="form-input" id="fsubject" placeholder="Procurement Collaboration / Opportunity"></div>
+          <div class="form-row"><label class="form-label">MESSAGE</label><textarea class="form-input" id="fmsg" placeholder="Tell me about the opportunity..." rows="4"></textarea></div>
+          <button class="form-submit" onclick="submitForm()">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-logo">EHT</div>
+  <div class="footer-sub">© 2025 Ehatashamul Haque Tanim · Supply Chain Management Executive · Dhaka, Bangladesh</div>
+</footer>
+
+<script>
+/* ─── PARTICLES ─── */
+const pc = document.getElementById('particles');
+for(let i=0;i<35;i++){
+  const p=document.createElement('div');p.className='particle';
+  p.style.cssText=`--x:${Math.random()*100}%;--dur:${6+Math.random()*10}s;--delay:${Math.random()*8}s`;
+  pc.appendChild(p);
+}
+
+/* ─── TYPING ─── */
+const words=["Procurement","Sourcing","Import Operations","Vendor Management","Logistics","Cost Optimization"];
+let wi=0,ci=0,del=false;
+const typed=document.getElementById('typed');
+function type(){
+  const w=words[wi];
+  if(!del){typed.textContent=w.slice(0,ci+1);if(ci+1===w.length){del=true;setTimeout(type,2000);return}ci++;}
+  else{typed.textContent=w.slice(0,ci-1);if(ci-1===0){del=false;wi=(wi+1)%words.length;ci=0}else ci--;}
+  setTimeout(type,del?35:75);
+}
+type();
+
+/* ─── WORLD MAP HERO (Canvas) ─── */
+const wm = document.getElementById('worldMap');
+const ctx = wm.getContext('2d');
+function resizeCanvas(){wm.width=wm.offsetWidth;wm.height=wm.offsetHeight;}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+
+const nodes = [
+  {x:0.18,y:0.38,label:'NYC'},{x:0.25,y:0.55,label:'SAO'},{x:0.46,y:0.30,label:'LON'},
+  {x:0.52,y:0.35,label:'FRA'},{x:0.55,y:0.25,label:'MSC'},{x:0.62,y:0.55,label:'DXB'},
+  {x:0.64,y:0.48,label:'MUM'},{x:0.69,y:0.50,label:'DAC'},{x:0.72,y:0.38,label:'DEL'},
+  {x:0.78,y:0.35,label:'SHG'},{x:0.80,y:0.42,label:'HKG'},{x:0.85,y:0.38,label:'TYO'},
+  {x:0.86,y:0.55,label:'SNG'},{x:0.92,y:0.58,label:'SYD'},
+];
+const routes=[
+  [7,10],[7,6],[7,5],[7,2],[7,0],[7,12],[7,11],[10,8],[10,9],[5,2],[2,0],[0,3],[3,4]
+];
+let t=0;
+const pulses=routes.map(()=>({t:Math.random()}));
+function drawMap(){
+  ctx.clearRect(0,0,wm.width,wm.height);
+  t+=0.004;
+  const W=wm.width,H=wm.height;
+  // Routes
+  routes.forEach(([a,b],i)=>{
+    const na=nodes[a],nb=nodes[b];
+    const x1=na.x*W,y1=na.y*H,x2=nb.x*W,y2=nb.y*H;
+    // Curved path
+    const mx=(x1+x2)/2,my=(y1+y2)/2-Math.abs(x2-x1)*0.18;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);ctx.quadraticCurveTo(mx,my,x2,y2);
+    ctx.strokeStyle='rgba(0,180,220,0.12)';ctx.lineWidth=1;ctx.stroke();
+    // Animated pulse
+    const pt=pulses[i].t=(pulses[i].t+0.003)%1;
+    const bt1=pt<0.5?2*pt*pt:1-Math.pow(-2*pt+2,2)/2;
+    const bx1=Math.pow(1-bt1,2)*x1+2*(1-bt1)*bt1*mx+bt1*bt1*x2;
+    const by1=Math.pow(1-bt1,2)*y1+2*(1-bt1)*bt1*my+bt1*bt1*y2;
+    ctx.beginPath();ctx.arc(bx1,by1,2.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,212,255,0.7)';ctx.fill();
+    ctx.beginPath();ctx.arc(bx1,by1,5,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,212,255,0.15)';ctx.fill();
+  });
+  // Nodes
+  nodes.forEach((n,i)=>{
+    const x=n.x*W,y=n.y*H;
+    const ping=Math.sin(t*2+i)*0.5+0.5;
+    ctx.beginPath();ctx.arc(x,y,4+ping*3,0,Math.PI*2);
+    ctx.fillStyle=`rgba(0,212,255,${0.05+ping*0.08})`;ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fillStyle=i===7?'rgba(0,212,255,0.9)':'rgba(0,212,255,0.5)';ctx.fill();
+    if(i===7){
+      ctx.beginPath();ctx.arc(x,y,6+ping*4,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(0,212,255,${0.3-ping*0.25})`;ctx.lineWidth=1;ctx.stroke();
+    }
+  });
+  requestAnimationFrame(drawMap);
+}
+drawMap();
+
+/* ─── MINI MAP (Contact) ─── */
+const mm=document.getElementById('miniMap');
+if(mm){
+  const mc=mm.getContext('2d');
+  const mnodes=[
+    {x:0.15,y:0.35},{x:0.45,y:0.28},{x:0.55,y:0.48},{x:0.62,y:0.42},{x:0.70,y:0.45},{x:0.78,y:0.35},{x:0.88,y:0.50}
+  ];
+  const mroutes=[[4,0],[4,1],[4,2],[4,3],[4,5],[4,6]];
+  const mpulses=mroutes.map(()=>({t:Math.random()}));
+  let mt=0;
+  function drawMini(){
+    mc.clearRect(0,0,mm.width,mm.height);mt+=0.005;
+    const W=mm.width,H=mm.height;
+    mroutes.forEach(([a,b],i)=>{
+      const na=mnodes[a],nb=mnodes[b];
+      const x1=na.x*W,y1=na.y*H,x2=nb.x*W,y2=nb.y*H;
+      const mx=(x1+x2)/2,my=(y1+y2)/2-20;
+      mc.beginPath();mc.moveTo(x1,y1);mc.quadraticCurveTo(mx,my,x2,y2);
+      mc.strokeStyle='rgba(0,212,255,0.15)';mc.lineWidth=1;mc.stroke();
+      mpulses[i].t=(mpulses[i].t+0.004)%1;
+      const pt=mpulses[i].t;
+      const bx=Math.pow(1-pt,2)*x1+2*(1-pt)*pt*mx+pt*pt*x2;
+      const by=Math.pow(1-pt,2)*y1+2*(1-pt)*pt*my+pt*pt*y2;
+      mc.beginPath();mc.arc(bx,by,2,0,Math.PI*2);mc.fillStyle='rgba(0,212,255,0.8)';mc.fill();
+    });
+    mnodes.forEach((n,i)=>{
+      mc.beginPath();mc.arc(n.x*W,n.y*H,i===4?5:3,0,Math.PI*2);
+      mc.fillStyle=i===4?'rgba(0,212,255,0.9)':'rgba(0,212,255,0.4)';mc.fill();
+    });
+    requestAnimationFrame(drawMini);
+  }
+  drawMini();
+}
+
+/* ─── COUNTER ANIMATION ─── */
+function animCount(el,target,suffix='',prefix=''){
+  let n=0;const step=Math.ceil(target/60);
+  const id=setInterval(()=>{n=Math.min(n+step,target);el.textContent=prefix+n+suffix;if(n>=target)clearInterval(id);},25);
+}
+const metricsObs=new IntersectionObserver(([e])=>{
+  if(e.isIntersecting){
+    animCount(document.getElementById('m1'),100,'+');
+    animCount(document.getElementById('m2'),15,'+');
+    animCount(document.getElementById('m3'),500,'+');
+    animCount(document.getElementById('m4'),1000,'+');
+    animCount(document.getElementById('m5'),20,'%');
+    metricsObs.disconnect();
+  }
+},{threshold:0.3});
+const metricsEl=document.querySelector('.metrics-grid');
+if(metricsEl)metricsObs.observe(metricsEl);
+
+/* ─── KPI BARS (sidebar) ─── */
+const kpis=[
+  {label:'On-Time Delivery',val:94,color:'#00d4ff'},
+  {label:'Supplier Compliance',val:88,color:'#3b82f6'},
+  {label:'Cost vs Budget',val:82,color:'#34d399'},
+];
+const kb=document.getElementById('kpi-bars');
+kpis.forEach(k=>{
+  const d=document.createElement('div');d.style.marginBottom='0.6rem';
+  d.innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:3px">
+    <span style="font-size:0.7rem;color:rgba(255,255,255,0.5)">${k.label}</span>
+    <span style="font-family:var(--font-mono);font-size:0.68rem;color:${k.color}">${k.val}%</span>
+  </div><div style="height:3px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden">
+    <div class="kpi-fill" style="height:100%;width:0%;background:${k.color};border-radius:2px;transition:width 1.5s ease"></div></div>`;
+  kb.appendChild(d);
+});
+setTimeout(()=>{document.querySelectorAll('.kpi-fill').forEach((el,i)=>{el.style.width=kpis[i].val+'%';});},600);
+
+/* ─── EXPERIENCE TIMELINE ─── */
+const exp=[
+  {co:"Akij Venture Group",role:"Executive – Supply Chain Management (Import)",period:"Sep 2025 – Present",color:"#00d4ff",bullets:["Managing foreign procurement and international supplier sourcing across multiple product categories","Negotiating with global vendors on cost, delivery terms, and quality compliance","Coordinating LC, TT, and international payments with Finance and banking teams","Ensuring full compliance with import regulations and supply chain standard procedures","Overseeing shipment tracking from origin to final destination"]},
+  {co:"Hana System Limited",role:"Operative Purchaser – Foreign Procurement",period:"Nov 2024 – Aug 2025",color:"#6366f1",bullets:["Coordinated cross-functionally with sales, production, and supplier teams for material planning","Monitored demand forecasts to ensure timely raw material procurement and availability","Managed international freight bookings and end-to-end shipment coordination","Maintained and strengthened relationships with international suppliers and freight forwarders"]},
+  {co:"B&T Group",role:"Executive – Supply Chain Management (Import)",period:"May 2024 – Oct 2024",color:"#34d399",bullets:["Managed full import-export documentation including Bill of Entry and LC instruments","Handled end-to-end supply chain operations from international sourcing to domestic delivery","Expanded and diversified vendor database through strategic alternative supplier sourcing"]},
+  {co:"Eastern Bank PLC",role:"Trainee Assistant Officer",period:"Dec 2022 – Oct 2023",color:"#f59e0b",bullets:["Managed inbound and outbound customer inquiries with professionalism and efficiency","Provided timely issue resolution and customer feedback management"]},
+];
+const tl=document.getElementById('tl');
+exp.forEach((item,i)=>{
+  const div=document.createElement('div');div.className='tl-item';
+  div.style.transitionDelay=i*0.1+'s';
+  div.innerHTML=`<div class="tl-dot" style="color:${item.color};border-color:${item.color};background:${item.color}22"></div>
+  <div class="tl-card" style="border-left-color:${item.color}">
+    <div class="tl-top">
+      <div class="tl-role">${item.role}</div>
+      <div class="tl-period">${item.period}</div>
+    </div>
+    <div class="tl-company" style="color:${item.color}">${item.co}</div>
+    <ul class="tl-bullets">${item.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+  </div>`;
+  tl.appendChild(div);
+  const o=new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){div.style.opacity='1';div.style.transform='none';div.classList.add('visible');o.disconnect();}
+  },{threshold:0.1});
+  o.observe(div);
+});
+
+/* ─── SKILLS ─── */
+const skills=[
+  {name:"Procurement & Sourcing",pct:92,icon:"🏭",color:"#00d4ff"},
+  {name:"Supplier Management",pct:88,icon:"🤝",color:"#6366f1"},
+  {name:"Import & LC Coordination",pct:90,icon:"📋",color:"#34d399"},
+  {name:"Logistics & Shipment Tracking",pct:86,icon:"🚢",color:"#f59e0b"},
+  {name:"Vendor Negotiation",pct:84,icon:"💬",color:"#f472b6"},
+  {name:"Supply Planning",pct:82,icon:"📊",color:"#00d4ff"},
+  {name:"ERP Systems",pct:78,icon:"💻",color:"#6366f1"},
+  {name:"Cost Optimization",pct:85,icon:"💰",color:"#34d399"},
+  {name:"Supply Chain Reporting",pct:80,icon:"📈",color:"#f59e0b"},
+];
+const sg=document.getElementById('skills-grid');
+skills.forEach((s,i)=>{
+  const d=document.createElement('div');d.className='skill-card';
+  d.style.cssText='opacity:0;transform:translateY(16px);transition:all 0.5s ease '+i*0.07+'s';
+  d.innerHTML=`<div class="skill-card-top">
+    <div class="skill-icon" style="background:${s.color}12;border-color:${s.color}30">${s.icon}</div>
+    <div class="skill-pct" style="color:${s.color}">${s.pct}%</div>
+  </div>
+  <div class="skill-name">${s.name}</div>
+  <div class="skill-bar-bg"><div class="skill-bar-fill" style="background:linear-gradient(90deg,${s.color},${s.color}66)"></div></div>`;
+  sg.appendChild(d);
+  const o=new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){
+      d.style.opacity='1';d.style.transform='none';
+      setTimeout(()=>{d.querySelector('.skill-bar-fill').style.width=s.pct+'%';},150);
+      o.disconnect();
+    }
+  },{threshold:0.1});
+  o.observe(d);
+});
+
+/* ─── OPERATIONS CARDS ─── */
+const ops=[
+  {icon:"🌐",title:"Vendor Development & Alternative Sourcing",desc:"Strategically identifying, evaluating, and onboarding international vendors to diversify supply base and reduce single-source dependency.",tags:["Sourcing","Vendor Dev","Risk Mitigation"],grad:"linear-gradient(90deg,#00d4ff,#3b82f6)"},
+  {icon:"✈️",title:"Import Operations Optimization",desc:"Streamlining end-to-end import workflows including LC management, customs clearance, Bill of Entry, and compliance documentation.",tags:["LC","Customs","Documentation"],grad:"linear-gradient(90deg,#6366f1,#8b5cf6)"},
+  {icon:"🚢",title:"International Shipment Coordination",desc:"Managing sea and air freight bookings, freight forwarder relations, shipment tracking, and carrier negotiations for on-time delivery.",tags:["Sea Freight","Air Freight","Tracking"],grad:"linear-gradient(90deg,#34d399,#059669)"},
+  {icon:"💰",title:"Procurement Cost Control",desc:"Implementing structured negotiation frameworks and supplier benchmarking to achieve cost reductions while maintaining quality standards.",tags:["Negotiation","Benchmarking","Savings"],grad:"linear-gradient(90deg,#f59e0b,#d97706)"},
+  {icon:"📊",title:"Supply Planning & Inventory Support",desc:"Supporting demand-driven procurement cycles through forecast analysis, safety stock management, and supplier lead time optimization.",tags:["Planning","Inventory","Forecasting"],grad:"linear-gradient(90deg,#f472b6,#ec4899)"},
+  {icon:"📋",title:"International Trade & Compliance",desc:"Ensuring full regulatory compliance across import/export documentation, payment instruments, and cross-border trade procedures.",tags:["Trade Compliance","TT","Regulations"],grad:"linear-gradient(90deg,#00d4ff,#6366f1)"},
+];
+const og=document.getElementById('ops-grid');
+ops.forEach((op,i)=>{
+  const d=document.createElement('div');d.className='op-card';
+  d.style.cssText=`--c-grad:${op.grad};opacity:0;transform:translateY(20px);transition:all 0.5s ease ${i*0.08}s`;
+  d.innerHTML=`<div class="op-icon">${op.icon}</div>
+  <h3>${op.title}</h3>
+  <p>${op.desc}</p>
+  <div class="op-tags">${op.tags.map(t=>`<span class="op-tag">${t}</span>`).join('')}</div>`;
+  og.appendChild(d);
+  const o=new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){d.style.opacity='1';d.style.transform='none';o.disconnect();}
+  },{threshold:0.1});
+  o.observe(d);
+});
+
+/* ─── EDUCATION ─── */
+const edu=[
+  {icon:"🎓",title:"MBA in Accounting",org:"National University",grade:"3.42/4.00",year:"2024",tag:"GRADUATE",c:"#00d4ff"},
+  {icon:"📚",title:"BBA in Accounting",org:"National University",grade:"3.41/4.00",year:"2022",tag:"GRADUATE",c:"#00d4ff"},
+  {icon:"🏅",title:"PGDSCM",org:"Bangladesh Institute of Management",grade:"Pursuing",year:"Active",tag:"PROFESSIONAL",c:"#6366f1"},
+  {icon:"📊",title:"CMA – Chartered Management Accountant",org:"ICMAB",grade:"Pursuing",year:"Active",tag:"PROFESSIONAL",c:"#6366f1"},
+  {icon:"🌐",title:"Supply Chain Career Bootcamp",org:"HDNB",grade:"Completed",year:"2025",tag:"CERTIFICATE",c:"#34d399"},
+  {icon:"🔗",title:"Procurement & Sourcing Intro",org:"Coursera",grade:"Completed",year:"2024",tag:"CERTIFICATE",c:"#34d399"},
+  {icon:"📈",title:"Excel Skills: Intermediate I",org:"Coursera",grade:"Completed",year:"2023",tag:"CERTIFICATE",c:"#34d399"},
+];
+const eg=document.getElementById('edu-grid');
+edu.forEach((item,i)=>{
+  const d=document.createElement('div');d.className='edu-card';
+  d.style.cssText=`opacity:0;transform:scale(0.95);transition:all 0.5s ease ${i*0.07}s`;
+  d.innerHTML=`<div style="font-size:1.5rem;margin-bottom:0.5rem">${item.icon}</div>
+  <div class="edu-type" style="background:${item.c}15;border:1px solid ${item.c}35;color:${item.c}">${item.tag}</div>
+  <h4>${item.title}</h4>
+  <div class="edu-org">${item.org}</div>
+  <div class="edu-footer"><span class="edu-grade" style="color:${item.c}">${item.grade}</span><span>${item.year}</span></div>`;
+  eg.appendChild(d);
+  const o=new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){d.style.opacity='1';d.style.transform='none';o.disconnect();}
+  },{threshold:0.1});
+  o.observe(d);
+});
+
+/* ─── FORM SUBMIT ─── */
+function submitForm(){
+  const n=document.getElementById('fname').value,e=document.getElementById('femail').value,m=document.getElementById('fmsg').value;
+  if(n&&e&&m){
+    document.getElementById('form-state').innerHTML=`<div style="text-align:center;padding:3rem 0">
+      <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+      <h3 style="font-family:var(--font-head);color:var(--c-cyan);font-size:1.2rem">Message Sent Successfully</h3>
+      <p style="color:var(--c-muted);margin-top:0.5rem;font-size:0.88rem">Thank you for reaching out. I'll respond within 24 hours.</p>
+    </div>`;
+  }
+}
+</script>
+</body>
+</html>
